@@ -1,6 +1,6 @@
 {
   "name": "xbacked-fee-collector",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A flexible and simple bot for collecting fees on the xBacked protocol",
   "main": "index.js",
   "type": "module",
@@ -29,8 +29,9 @@
   "homepage": "https://github.com/YinkaEnoch/xbacked-fee-collector#readme",
   "dependencies": {
     "@xbacked-dao/xbacked-sdk": "^0.0.30",
-    "D": "^1.0.0",
-    "dotenv": "^16.0.0",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
     "nodemon": "^2.0.15"
   }
 }
