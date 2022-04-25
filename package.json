@@ -1,0 +1,35 @@
+{
+  "name": "xbacked-fee-collector",
+  "version": "0.0.1",
+  "description": "A flexible and simple bot for collecting fees on the xBacked protocol",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YinkaEnoch/xbacked-fee-collector.git"
+  },
+  "keywords": [
+    "xbacked",
+    "fee-collector",
+    "collector",
+    "fee",
+    "keeper",
+    "keepers"
+  ],
+  "author": "Yinka Enoch Adedokun <adedokunyinkaenoch@gmail.com> (https://yinkaenoch.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YinkaEnoch/xbacked-fee-collector/issues"
+  },
+  "homepage": "https://github.com/YinkaEnoch/xbacked-fee-collector#readme",
+  "dependencies": {
+    "@xbacked-dao/xbacked-sdk": "^0.0.30",
+    "D": "^1.0.0",
+    "dotenv": "^16.0.0",
+    "nodemon": "^2.0.15"
+  }
+}
