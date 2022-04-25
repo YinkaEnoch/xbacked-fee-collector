@@ -1,4 +1,10 @@
-import "dotenv/config";
+/**
+ * Collect fees that have been accrued over time.
+ * Caller is rewarded with 0.5% of the accrued fees and the rest is distributed
+ * to the DAO and xUSD stakers
+ * Fees is settled in the vault collateral asset (ALGO or ASA)
+ * */
+
 import { Account, Vault, VAULT_IDS } from "@xbacked-dao/xbacked-sdk";
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -12,20 +18,16 @@ const feeCollector = async ({ account, vault }) => {
   isFeesSettled && console.log("Fee was successfully settled");
 };
 
-(async () => {
+const taskRunner = async ({ sleepDuration, network, passPhrase }) => {
   // Check for null parameters
-  if (
-    !process.env.PASS_PHRASE ||
-    !process.env.SLEEP_DURATION ||
-    !process.env.NETWORK
-  )
+  if (!sleepDuration || !network || !passPhrase)
     throw new Error("Some required parameters are missing!");
 
   console.log("Instantiating account...");
   // Instantiate a new Account
   const account = new Account({
-    mnemonic: process.env.PASS_PHRASE,
-    network: process.env.NETWORK,
+    mnemonic: passPhrase,
+    network,
   });
 
   // Instantiate a new Vault
@@ -35,10 +37,12 @@ const feeCollector = async ({ account, vault }) => {
   do {
     try {
       console.log("Sleeping...");
-      await sleep(process.env.SLEEP_DURATION);
+      await sleep(sleepDuration);
       await feeCollector({ account, vault });
     } catch (e) {
       console.log(e);
     }
   } while (true);
-})().catch((e) => console.log(e));
+};
+
+export default taskRunner;
