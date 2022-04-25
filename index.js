@@ -4,11 +4,24 @@ import { Account, Vault, VAULT_IDS } from "@xbacked-dao/xbacked-sdk";
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const feeCollector = async ({ account, vault }) => {
+  console.log(`Collecting fees... ${new Date().toString()}`);
   const isFeesSettled = await account.collectFees({ vault });
-  console.log(isFeesSettled);
+
+  if (!isFeesSettled) return false;
+
+  isFeesSettled && console.log("Fee was successfully settled");
 };
 
 (async () => {
+  // Check for null parameters
+  if (
+    !process.env.PASS_PHRASE ||
+    !process.env.SLEEP_DURATION ||
+    !process.env.NETWORK
+  )
+    throw new Error("Some required parameters are missing!");
+
+  console.log("Instantiating account...");
   // Instantiate a new Account
   const account = new Account({
     mnemonic: process.env.PASS_PHRASE,
@@ -20,7 +33,12 @@ const feeCollector = async ({ account, vault }) => {
 
   // Collect Fees
   do {
-    await feeCollector({ account, vault });
-    await sleep(process.env.SLEEP_DURATION);
+    try {
+      console.log("Sleeping...");
+      await sleep(process.env.SLEEP_DURATION);
+      await feeCollector({ account, vault });
+    } catch (e) {
+      console.log(e);
+    }
   } while (true);
 })().catch((e) => console.log(e));
