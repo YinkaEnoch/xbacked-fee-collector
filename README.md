@@ -1,7 +1,7 @@
 # xbacked-fee-collector
 
 > This module runs the collectFees method to distribute fees accrued in the
-> vault to the DAO and stakers.
+> vault to the DAO and stakers. The caller is rewarded with 0.5% of the accrued fees
 
 ## Install
 
