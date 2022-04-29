@@ -1,6 +1,6 @@
 {
   "name": "xbacked-fee-collector",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A flexible and simple bot for collecting fees on the xBacked protocol",
   "main": "index.js",
   "type": "module",
